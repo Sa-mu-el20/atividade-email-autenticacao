@@ -12,17 +12,13 @@ export default function LoginScreen({ navigation }) {
   // quando alteradas, atualizam a interface
   // todos eles irão ter o estado inicial definido como ('') - string vazia
   // Crie 3 estados usando useState:
-  
-  // 1. email: armazenará o email digitado pelo usuário// 🛠️ IMPLEMENTE AQUI
-    const [email, setEmail] = useState('')
- 
-  // 2. senha: armazenará a senha digitada// 🛠️ IMPLEMENTE AQUI
-  const[senha, setSenha] = useState('')
+ // 1. email: armazenará o email digitado pelo usuário// 🛠️ IMPLEMENTE AQUI
+const[ email, setEmail] = useState('')
+// 2. senha: armazenará a senha digitada// 🛠️ IMPLEMENTE AQUI
+const[ senha, setSenha] = useState('')
 
-  
-  // 3. mensagemErro: armazenará mensagens de erro para exibir ao usuário// 🛠️ IMPLEMENTE AQUI
-  const [mensagemErro, setMensagemErro] = useState('')
-
+// 3. mensagemErro: armazenará mensagens de erro para exibir ao usuário// 🛠️ IMPLEMENTE AQUI
+const[ mensagemErro, setMensagemErro] = useState('')
 
   // 📌 QUESTÃO 6 - Função de Login// Esta função será chamada quando o usuário clicar no botão "Entrar"
   const handleLogin = async () => {
@@ -112,7 +108,7 @@ export default function LoginScreen({ navigation }) {
       {/* Quando clicado, navega para a tela de cadastro (criaremos na Parte 2) */}
       <Button 
         mode="text" 
-        onPress={() => navigation.navigate('Cadastro')}
+        onPress={() => router.navigate('cadastro')}
         style={styles.botaoTexto}
       >
         Não tem conta? Cadastre-se

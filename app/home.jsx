@@ -38,7 +38,11 @@ export default function HomeScreen() {
       >
         Sair
       </Button>
+       
     </View>
+
+    
+  
   );
 }
 

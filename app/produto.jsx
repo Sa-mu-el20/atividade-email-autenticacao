@@ -18,28 +18,15 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../src/config/firebaseConfig';
 import { router } from 'expo-router';
 
-import { doc, setDoc } from 'firebase/firestore';
-import { db } from '../src/config/firebaseConfig';
-
 export default function CadastroScreen() {
   // 📌 QUESTÃO 2 - Estados para dados do usuário
   // Crie estados para armazenar os dados do formulário
   
   // Dados pessoais - nome, email, senha, confirmarSenha
-  const[nome, setNome] = useState('')
-  const [email, setEmail] = useState('')
-  const[senha, setSenha] = useState('')
-  const[confirmarSenha, setConfirmarSenha] = useState ('')
-
- 
-const[cep, setCep] = useState('');
-const[logradouro, setLogradouro] = useState('');
-const[numero, setNumero] = useState('');
-const[complemento, setComplemento] = useState('');
-const[bairro, setBairro] = useState('');
-const[cidade, setCidade] = useState('');
-const[estado, setEstado] = useState('');
-  
+  const[titulo, setTitulo] = useState('');
+  const [validade, setValidade] = useState('');
+  const[descricao, setDescricao] = useState('');
+  const[categoria, setCategoria] = useState ('');
   // 🛠️ IMPLEMENTE AQUI - Crie estados para o endereço
   // Dica: cep, logradouro, numero, complemento, bairro, cidade, estado
  
@@ -113,38 +100,25 @@ const[estado, setEstado] = useState('');
     const novosErros = {};
 
     // Validar nome
-    if (!nome.trim()) {
-      novosErros.nome = 'Nome é obrigatório';
+    if (!titulo.trim()) {
+      novosErros.nome = 'titulo é obrigatório';
     }
 
-    // Validar email
-    if (!email.trim()) {
-      novosErros.email = 'Email é obrigatório';
-    } else if (!/\S+@\S+\.\S+/.test(email)) {
-      novosErros.email = 'Email inválido';
+     if (!validade.trim()) {
+      novosErros.nome = 'validade é obrigatório';
     }
 
-    // 🛠️ IMPLEMENTE AQUI
-    // Validar senha (mínimo 6 caracteres)
-    if (!senha) {
-      novosErros.senha = 'Senha é obrigatória';
-    } else if (senha.length < 6) {
-      novosErros.senha = 'Senha deve ter no mínimo 6 caracteres';
+    
+     if (!descricao.trim()) {
+      novosErros.nome = 'descricao é obrigatório';
     }
 
-    // 🛠️ IMPLEMENTE AQUI
-    // Validar confirmação de senha
-    if (senha !== confirmarSenha) {
-      novosErros.confirmarSenha = 'As senhas não coincidem';
+    
+     if (!categoria.trim()) {
+      novosErros.nome = 'categoria é obrigatório';
     }
 
-    // Validar CEP
-    const cepLimpo = cep.replace(/\D/g, '');
-    if (!cepLimpo) {
-      novosErros.cep = 'CEP é obrigatório';
-    } else if (cepLimpo.length !== 8) {
-      novosErros.cep = 'CEP deve ter 8 dígitos';
-    }
+
 
     // Validar campos de endereço
     if (!logradouro.trim()) novosErros.logradouro = 'Logradouro é obrigatório';
@@ -159,7 +133,7 @@ const[estado, setEstado] = useState('');
 
   // 📌 QUESTÃO 5 - Função de cadastro
   // Esta função cria o usuário no Firebase
-  const handleCadastro = async () => {
+  const handleCadastroProduto = async () => {
     // Valida os campos
     if (!validarCampos()) {
       setMensagem('Por favor, corrija os erros no formulário.');
@@ -172,15 +146,12 @@ const[estado, setEstado] = useState('');
       // 🛠️ IMPLEMENTE AQUI
       // Use createUserWithEmailAndPassword do Firebase
       // Passa: auth, email, senha
-      const userCredential = await createUserWithEmailAndPassword(auth, email, senha);
-      const user = userCredential.user;
-
-      await setDoc(doc(db, 'usuarios', user.uid), { nome: nome, email: email, endereco: { cep: cep, logradouro: logradouro, numero: numero, complemento: complemento, bairro: bairro, cidade: cidade, estado: estado, }, criadoEm: new Date().toISOString(), });
+      await createUserWithEmailAndPassword(auth, email, senha);
 
       // Sucesso! Aqui você poderia salvar os dados de endereço em um banco de dados
       // Por enquanto, vamos apenas mostrar mensagem e redirecionar
       
-      console.log('Usuário cadastrado com sucesso!');
+      console.log('Produto cadastrado com sucesso!');
       console.log('Endereço:', { cep, logradouro, numero, complemento, bairro, cidade, estado });
       
       setMensagem('Cadastro realizado com sucesso!');
